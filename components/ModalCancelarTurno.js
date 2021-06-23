@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Modal } from 'react-native';
 
 const ModalCancelarTurno = (props)=>{
     return(
-        <Modal animationType='slide' visible={props.modalVisible} transparent={true} style={styles.modalParent}> 
+        <Modal animationType='fade' visible={props.modalVisible} transparent={true} style={styles.modalParent}> 
           <View style={styles.modal}>
             <View style={styles.modalContainer}>
               <Text style={styles.tituloModal}>¿Desea cancelar el turno de {props.itemSeleccionado.cliente}?</Text>

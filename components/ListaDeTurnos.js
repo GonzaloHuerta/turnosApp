@@ -1,26 +1,27 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 
 const ListaDeTurnos = (props)=>{
     return(
-        <View style={styles.listContainer}>
-            <FlatList 
-            data={props.listaTurnos}
-            renderItem={data=>{
-                return(
-                <View style={styles.itemContainer}>
-                    <Text style={styles.horaTurno}>{data.item.hora}</Text>
-                    <Text style={styles.nombreCliente}>{data.item.cliente}</Text>
-                    <Text style={styles.descripcion}>{data.item.descripcion}</Text>
-                    <TouchableOpacity style={styles.botonCancelarTurno} onPress={()=>props.handleModalCancelarTurno(data.item.id)}>
-                        <Text style={styles.textoBoton}>Cancelar Turno</Text>
-                    </TouchableOpacity>
-                </View> 
-                )
-            }}
-            keyExtractor={item=>item.id}
-            />         
-        </View>
+          <View style={styles.listContainer}>
+              <FlatList 
+              data={props.listaTurnos}
+              renderItem={data=>{
+                  return(
+                    <View style={styles.itemContainer}>
+                        <Text style={styles.horaTurno}>{data.item.hora}</Text>
+                          <Text style={styles.nombreCliente}>{data.item.cliente}</Text>
+                          <Text style={styles.descripcion}>{data.item.descripcion}</Text>
+                          <TouchableOpacity style={styles.botonCancelarTurno} onPress={()=>props.handleModalCancelarTurno(data.item.id)}>
+                              <Text style={styles.textoBoton}>Cancelar Turno</Text>
+                          </TouchableOpacity>
+                    </View> 
+                  )
+              }}
+              keyExtractor={item=>item.id}
+              />      
+              <View style={styles.clear}></View>   
+          </View>   
     )
 }
 
@@ -29,6 +30,9 @@ export default ListaDeTurnos;
 const styles = StyleSheet.create({
     listContainer:{
         marginTop: 15,
+        paddingBottom: 300,
+        height: '100%',
+        
       },
       itemContainer:{
         backgroundColor: '#fafafa',
@@ -57,4 +61,7 @@ const styles = StyleSheet.create({
         color: "#ffffff",
         fontWeight: 'bold',
       },
+      clear:{
+        height: 40,
+      }
 })

@@ -67,7 +67,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor='#fff' barStyle='dark-content' />
+      <StatusBar backgroundColor='#000' barStyle='dark-content' />
       <Header title="Agregar nuevo turno" />
       <FormAgregarTurno 
         handleSetHoraTurno={handleSetHoraTurno}
@@ -82,7 +82,7 @@ export default function App() {
       
       {listaTurnos.length > 0 ? 
       <View>
-        <Text style={styles.title}>Lista de turnos para hoy:</Text>
+        <Text style={styles.title}>Turnos de hoy:</Text>
         <ListaDeTurnos 
         listaTurnos={listaTurnos}
         handleModalCancelarTurno={handleModalCancelarTurno}
@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
   title:{
     fontSize: 24,
     textAlign: 'center',
-    marginBottom: 15,
   },
   textoSinTurnos:{
     textAlign: 'center',
