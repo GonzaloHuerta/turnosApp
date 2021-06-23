@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
       },
       botonCancelarTurno:{
         alignItems: 'center',
-        backgroundColor: 'red',
+        backgroundColor: '#F8333C',
         padding: 10,
       },
       textoBoton:{

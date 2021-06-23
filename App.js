@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import ModalCancelarTurno from './components/ModalCancelarTurno';
 import FormAgregarTurno from './components/FormAgregarTurno';
 import ListaDeTurnos from './components/ListaDeTurnos';
+import Header from './components/Header';
 
 export default function App() {
   const [cliente, setCliente] = useState('');
@@ -67,7 +68,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor='#fff' barStyle='dark-content' />
-      <Text style={styles.title}>Agregar nuevo turno</Text>
+      <Header title="Agregar nuevo turno" />
       <FormAgregarTurno 
         handleSetHoraTurno={handleSetHoraTurno}
         handleSetCliente={handleSetCliente}

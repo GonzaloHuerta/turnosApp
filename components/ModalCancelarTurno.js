@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
       },
       botonSi:{
-        backgroundColor: 'green',
+        backgroundColor: '#44AF69',
         paddingLeft: 20,
         paddingRight: 20,
         paddingTop: 6,
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
       },  
       botonNo:{
-        backgroundColor: 'red',
+        backgroundColor: '#F8333C',
         paddingLeft: 20,
         paddingRight: 20,
         paddingTop: 6,

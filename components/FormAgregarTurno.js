@@ -5,7 +5,8 @@ const FormAgregarTurno = (props)=>{
     return(
         <View style={styles.formAgregarTurno}>
             <View style={styles.formGroup}>
-            <TextInput 
+            <TextInput
+                keyboardType='numeric'
                 placeholder='Hora'
                 style={styles.input}
                 onChangeText={props.handleSetHoraTurno}
@@ -49,11 +50,11 @@ const styles = StyleSheet.create({
       },
       inputDescripcion:{
         marginBottom: 20,
-        marginTop: 6
+        marginTop: 15
       },
       botonAgregarTurno:{
         alignItems: 'center',
-        backgroundColor: 'green',
+        backgroundColor: '#44AF69',
         padding: 10,
       },
       botonAgregarTurnoDisabled:{
