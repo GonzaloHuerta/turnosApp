@@ -1,54 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import {useFonts} from 'expo-font';
+import AppLoading from 'expo-app-loading';
 
-import ModalCancelarTurno from './components/ModalCancelarTurno';
+import ModalCancelarTurno from './screens/ModalCancelarTurno';
 import FormAgregarTurno from './components/FormAgregarTurno';
-import ListaDeTurnos from './components/ListaDeTurnos';
+import ListaDeTurnos from './screens/ListaDeTurnos';
 import Header from './components/Header';
+import PantallaInicio from './screens/PantallaInicio';
+import PantallaAgregarTurno from './screens/PantallaAgregarTurno';
 
 export default function App() {
-  const [cliente, setCliente] = useState('');
-  const [horaTurno, setHoraTurno] = useState('');
-  const [descripcion, setDescripcion] = useState('');
+  
   const [listaTurnos, setListaTurnos] = useState([]);
   const [itemSeleccionado, setItemSeleccionado] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
-  const [sinDatos, setSinDatos] = useState(false);
-
-
-  const handleSetCliente = (txtCliente)=>{
-    setCliente(txtCliente);
-  }
-
-  const handleSetHoraTurno = (txtHoraTurno) =>{
-    setHoraTurno(txtHoraTurno);
-  }
-
-  const handleSetDescripcion = (txtDescripcion) =>{
-    setDescripcion(txtDescripcion);
-  }
   
-  const handleAgregarTurno = ()=>{
-    if(cliente == '' || horaTurno == '' || descripcion == ''){
-      setSinDatos(true);
-    }
-    else{
-      setListaTurnos([
-        ...listaTurnos,
-        {
-          id: Math.random().toString(),
-          hora: horaTurno,
-          cliente: cliente,
-          descripcion: descripcion
-        }
-      ])
-      setCliente('');
-      setHoraTurno('');
-      setDescripcion('');
-      setSinDatos(false);
-    }
-  }
+  const [dataLoaded] = useFonts({
+    'montserrat-regular': require('./assets/fonts/Montserrat-Regular.ttf'),
+    'montserrat-bold': require('./assets/fonts/Montserrat-Bold.ttf'),
+  })
+  const [pantallaInicio, setPantallaInicio] = useState(true);
 
   const handleModalCancelarTurno = id =>{
     setItemSeleccionado(listaTurnos.find(item=>item.id===id));
@@ -58,38 +31,32 @@ export default function App() {
   const handleCerrarModal = ()=>{
     setModalVisible(false);
   }
-
+  
   const handleCancelarTurno = id =>{
     setListaTurnos(listaTurnos.filter(item=>item.id !== id));
     setModalVisible(false);
     setItemSeleccionado({});
   }
 
+  if(!dataLoaded){
+    return <AppLoading />
+  }
+
+  const contenido = pantallaInicio
+  ? <PantallaInicio
+      handleModalCancelarTurno={handleModalCancelarTurno}
+      listaTurnos={listaTurnos}
+    />
+  : <PantallaAgregarTurno 
+      pantallaInicio={pantallaInicio}
+      setPantallaInicio={setPantallaInicio}
+    />
+
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor='#000' barStyle='dark-content' />
-      <Header title="Agregar nuevo turno" />
-      <FormAgregarTurno 
-        handleSetHoraTurno={handleSetHoraTurno}
-        handleSetCliente={handleSetCliente}
-        handleSetDescripcion={handleSetDescripcion}
-        handleAgregarTurno={handleAgregarTurno}
-        horaTurno={horaTurno}
-        cliente={cliente}
-        descripcion={descripcion}
-        sinDatos={sinDatos}
-      />
-      
-      {listaTurnos.length > 0 ? 
-      <View>
-        <Text style={styles.title}>Turnos de hoy:</Text>
-        <ListaDeTurnos 
-        listaTurnos={listaTurnos}
-        handleModalCancelarTurno={handleModalCancelarTurno}
-      />
-      </View>
-        
-      : <Text style={styles.textoSinTurnos}>Sin turnos para hoy</Text>}
+      <StatusBar barStyle='light-content' />
+
+      {contenido}
 
       <ModalCancelarTurno
         modalVisible={modalVisible}
