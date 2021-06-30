@@ -28,8 +28,8 @@ const PantallaAgregarTurno = (props)=>{
           setSinDatos(true);
         }
         else{
-          setListaTurnos([
-            ...listaTurnos,
+          props.setListaTurnos([
+            ...props.listaTurnos,
             {
               id: Math.random().toString(),
               hora: horaTurno,
@@ -45,7 +45,7 @@ const PantallaAgregarTurno = (props)=>{
     }
 
     const handleIrAInicio = ()=>{
-        props.setPantallaInicio(false);
+        props.setPantallaInicio(true);
     }
 
     return(
