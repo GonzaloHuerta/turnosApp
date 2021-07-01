@@ -9,7 +9,7 @@ const ListaDeTurnos = (props)=>{
               renderItem={data=>{
                   return(
                     <View style={styles.itemContainer}>
-                        <Text style={styles.horaTurno}>{data.item.hora}</Text>
+                        <Text style={styles.horaTurno}>{data.item.hora} hs.</Text>
                           <Text style={styles.nombreCliente}>{data.item.cliente}</Text>
                           <Text style={styles.descripcion}>{data.item.descripcion}</Text>
                           <TouchableOpacity style={styles.botonCancelarTurno} onPress={()=>props.handleModalCancelarTurno(data.item.id)}>
@@ -30,9 +30,8 @@ export default ListaDeTurnos;
 const styles = StyleSheet.create({
     listContainer:{
         marginTop: 15,
-        paddingBottom: 300,
+        paddingBottom: 200,
         height: '100%',
-        
       },
       itemContainer:{
         backgroundColor: '#fafafa',
@@ -56,6 +55,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#F8333C',
         padding: 10,
+        borderRadius: 10,
       },
       textoBoton:{
         color: "#ffffff",

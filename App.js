@@ -6,6 +6,7 @@ import AppLoading from 'expo-app-loading';
 
 import PantallaInicio from './screens/PantallaInicio';
 import PantallaAgregarTurno from './screens/PantallaAgregarTurno';
+import TopBar from './components/TopBar';
 
 export default function App() {
   
@@ -34,20 +35,20 @@ export default function App() {
       setPantallaInicio={setPantallaInicio}
     />
 
-  return (
+  return ( 
     <View style={styles.container}>
+      <TopBar />
       <StatusBar barStyle='light-content' />
       {contenido}
-    </View>  
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
+    marginTop: 20,
     flex: 1,
     backgroundColor: '#fff',
-    paddingHorizontal: 20,
   },
   title:{
     fontSize: 24,

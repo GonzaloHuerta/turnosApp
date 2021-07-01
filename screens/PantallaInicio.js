@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-import ListaDeTurnos from './ListaDeTurnos';
+import ListaDeTurnos from '../components/ListaDeTurnos';
 import Header from '../components/Header';
-import ModalCancelarTurno from './ModalCancelarTurno';
+import ModalCancelarTurno from '../components/ModalCancelarTurno';
 
 const HomeScreen = (props)=>{
   const [itemSeleccionado, setItemSeleccionado] = useState({});
@@ -28,21 +28,24 @@ const HomeScreen = (props)=>{
   }
 
     return(
-        <View>
+        <View style={styles.container}>
             <Header title="Lista de turnos"/>
+            <TouchableOpacity style={styles.botonIrATurnos} onPress={handleSwitchToAgregarTurnos} >
+              <Text style={styles.textoBotonIrATurnos}>Agregar Turnos</Text>
+            </TouchableOpacity>
             {props.listaTurnos.length > 0 ? 
             <View>
-                <Text style={styles.title}>Turnos de hoy:</Text>
-                <ListaDeTurnos 
-                  listaTurnos={props.listaTurnos}
-                  handleModalCancelarTurno={handleModalCancelarTurno}
-                />
-                
+              
+              <Text style={styles.title}>Turnos de hoy:</Text>
+              <ListaDeTurnos 
+                listaTurnos={props.listaTurnos}
+                handleModalCancelarTurno={handleModalCancelarTurno}
+              />
             </View>
                 
             : <Text style={styles.textoSinTurnos}>Sin turnos para hoy</Text>}
-            <Button title="Ir a Agregar turnos" onPress={handleSwitchToAgregarTurnos} />
-
+            
+            
             <ModalCancelarTurno
               modalVisible={modalVisible}
               itemSeleccionado={itemSeleccionado}
@@ -54,20 +57,30 @@ const HomeScreen = (props)=>{
 }
 
 const styles = StyleSheet.create({
-    container: {
-      marginTop: 40,
-      flex: 1,
-      backgroundColor: '#fff',
-      paddingHorizontal: 20,
-    },
-    title:{
-      fontSize: 24,
-      textAlign: 'center',
-    },
-    textoSinTurnos:{
-      textAlign: 'center',
-      paddingTop: 20,
-    },
+  container:{
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
+  },
+  title:{
+    fontSize: 24,
+    textAlign: 'center',
+  },
+  textoSinTurnos:{
+    textAlign: 'center',
+    paddingVertical: 20,
+  },
+  botonIrATurnos:{
+    alignItems: 'center',
+    backgroundColor: '#2B9EB3',
+    padding: 10,
+    marginBottom: 20,
+    borderRadius: 10,
+  },
+  textoBotonIrATurnos:{
+      color: "#ffffff",
+      fontWeight: 'bold',
+  }
   });
 
 export default HomeScreen;

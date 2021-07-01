@@ -12,18 +12,15 @@ const Header = (props)=>{
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: '#2B9EB3',
-        height: 80,
-        alignItems: 'center',
-        justifyContent: 'center',
+        height: 40,
         marginBottom: 15,
-    },  
+        width: '100%',
+    },
     title:{
-        color: '#ffffff',
+        color: '#485665',
         fontSize: 24,
-        textAlign: 'center',
         fontWeight: 'bold',
-        fontFamily: 'montserrat-bold'
+        fontFamily: 'montserrat-regular',
     }
 })
 
