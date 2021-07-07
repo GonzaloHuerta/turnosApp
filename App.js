@@ -7,6 +7,7 @@ import AppLoading from 'expo-app-loading';
 import PantallaInicio from './screens/PantallaInicio';
 import PantallaAgregarTurno from './screens/PantallaAgregarTurno';
 import TopBar from './components/TopBar';
+import Navigator from './navigation/Navigator';
 
 export default function App() {
   
@@ -22,7 +23,7 @@ export default function App() {
     return <AppLoading />
   }
 
-  const contenido = pantallaInicio
+ /*  const contenido = pantallaInicio
   ? <PantallaInicio
       setPantallaInicio={setPantallaInicio}
       listaTurnos={listaTurnos}
@@ -33,14 +34,13 @@ export default function App() {
       listaTurnos={listaTurnos}
       setListaTurnos={setListaTurnos}
       setPantallaInicio={setPantallaInicio}
-    />
+    /> */
 
   return ( 
-    <View style={styles.container}>
-      <TopBar />
-      <StatusBar barStyle='light-content' />
-      {contenido}
-    </View>
+    <Navigator 
+      listaTurnos={listaTurnos}
+      setListaTurnos={setListaTurnos}
+    />
   );
 }
 
