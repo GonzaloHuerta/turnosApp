@@ -16,7 +16,6 @@ const Navigator = ()=>{
                     name="Home"
                     component={PantallaInicio}
                     options={{title: 'Inicio'}}
-                    initialParams={{ listaTurnos, setListaTurnos }}
                 />
                 <Stack.Screen 
                     name="AgregarTurno"

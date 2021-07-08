@@ -4,12 +4,14 @@ import { View, StyleSheet, Button, Text, TouchableOpacity} from 'react-native';
 import Header from '../components/Header';
 import FormAgregarTurno from '../components/FormAgregarTurno';
 
-const PantallaAgregarTurno = (props)=>{
+const PantallaAgregarTurno = ({ route, navigation })=>{
     const [cliente, setCliente] = useState('');
     const [horaTurno, setHoraTurno] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [sinDatos, setSinDatos] = useState(false);
     const [turnoAgregadoTxt, setTurnoAgregadoTxt] = useState(false);
+
+    const { listaTurnos, setListaTurnos } = route.params;
 
     const handleSetCliente = (txtCliente)=>{
         setCliente(txtCliente);
@@ -38,8 +40,8 @@ const PantallaAgregarTurno = (props)=>{
           setSinDatos(true);
         }
         else{
-          props.setListaTurnos([
-            ...props.listaTurnos,
+          setListaTurnos([
+            ...listaTurnos,
             {
               id: Math.random().toString(),
               hora: horaTurno,
@@ -52,6 +54,7 @@ const PantallaAgregarTurno = (props)=>{
           setDescripcion('');
           setSinDatos(false);
           setTurnoAgregadoTxt(true);
+          console.log('Lista Turnos', listaTurnos);
         }
     }
 
@@ -61,7 +64,7 @@ const PantallaAgregarTurno = (props)=>{
 
     return(
         <View style={styles.container}>
-            <Header title="Agregar nuevo turno" />
+            {/* <Header title="Agregar nuevo turno" /> */}
             <FormAgregarTurno 
                 handleSetHoraTurno={handleSetHoraTurno}
                 handleSetCliente={handleSetCliente}
@@ -73,7 +76,12 @@ const PantallaAgregarTurno = (props)=>{
                 sinDatos={sinDatos}
             />
             {turnoAgregadoTxt ? <Text style={styles.mensaje}>¡Turno agregado!</Text> : null}
-            <TouchableOpacity style={styles.botonVerTurnos} onPress={handleIrAInicio} >
+            <TouchableOpacity 
+                style={styles.botonVerTurnos} 
+                onPress={()=>{
+                    navigation.navigate('Home')
+                }} 
+            >
               <Text style={styles.textoBoton}>Ver lista de turnos</Text>
             </TouchableOpacity>
         </View>
@@ -85,6 +93,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         paddingHorizontal: 20,
+        paddingVertical: 10,
     },
     mensaje:{
         textAlign: 'center',

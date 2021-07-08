@@ -5,12 +5,13 @@ import ListaDeTurnos from '../components/ListaDeTurnos';
 import Header from '../components/Header';
 import ModalCancelarTurno from '../components/ModalCancelarTurno';
 
-const HomeScreen = (props)=>{
+const HomeScreen = ({ navigation })=>{
   const [itemSeleccionado, setItemSeleccionado] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
+  const [listaTurnos, setListaTurnos] = useState([]);
 
   const handleModalCancelarTurno = id =>{
-    setItemSeleccionado(props.listaTurnos.find(item=>item.id===id));
+    setItemSeleccionado(listaTurnos.find(item=>item.id===id));
     setModalVisible(true);
   }
 
@@ -19,7 +20,7 @@ const HomeScreen = (props)=>{
   }
   
   const handleCancelarTurno = id =>{
-    props.setListaTurnos(props.listaTurnos.filter(item=>item.id !== id));
+    setListaTurnos(listaTurnos.filter(item=>item.id !== id));
     setModalVisible(false);
     setItemSeleccionado({});
   }
@@ -27,18 +28,27 @@ const HomeScreen = (props)=>{
     props.setPantallaInicio(false);
   }
 
+  const { listaTurnos, setListaTurnos } = route.params;
+
     return(
         <View style={styles.container}>
-            <Header title="Lista de turnos"/>
-            <TouchableOpacity style={styles.botonIrATurnos} onPress={handleSwitchToAgregarTurnos} >
+            {/* <Header title="Lista de turnos"/> */}
+            <TouchableOpacity 
+              style={styles.botonIrATurnos} 
+              onPress={()=>{
+                navigation.navigate('AgregarTurno',{
+                  listaTurnos: listaTurnos,
+                  setListaTurnos: setListaTurnos
+                });
+              }} >
               <Text style={styles.textoBotonIrATurnos}>Agregar Turnos</Text>
             </TouchableOpacity>
-            {props.listaTurnos.length > 0 ? 
+            {listaTurnos.length > 0 ? 
             <View>
               
               <Text style={styles.title}>Turnos de hoy:</Text>
               <ListaDeTurnos 
-                listaTurnos={props.listaTurnos}
+                listaTurnos={listaTurnos}
                 handleModalCancelarTurno={handleModalCancelarTurno}
               />
             </View>
@@ -61,6 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     paddingHorizontal: 20,
+    paddingVertical: 10,
   },
   title:{
     fontSize: 24,

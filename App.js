@@ -11,7 +11,7 @@ import Navigator from './navigation/Navigator';
 
 export default function App() {
   
-  const [listaTurnos, setListaTurnos] = useState([]);
+  /* const [listaTurnos, setListaTurnos] = useState([]); */
   
   const [dataLoaded] = useFonts({
     'montserrat-regular': require('./assets/fonts/Montserrat-Regular.ttf'),
@@ -37,10 +37,7 @@ export default function App() {
     /> */
 
   return ( 
-    <Navigator 
-      listaTurnos={listaTurnos}
-      setListaTurnos={setListaTurnos}
-    />
+    <Navigator />
   );
 }
 
