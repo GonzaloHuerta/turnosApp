@@ -79,7 +79,10 @@ const PantallaAgregarTurno = ({ route, navigation })=>{
             <TouchableOpacity 
                 style={styles.botonVerTurnos} 
                 onPress={()=>{
-                    navigation.navigate('Home')
+                    navigation.navigate('Home',{
+                        listaTurnos: listaTurnos,
+                        setListaTurnos: setListaTurnos
+                      });
                 }} 
             >
               <Text style={styles.textoBoton}>Ver lista de turnos</Text>

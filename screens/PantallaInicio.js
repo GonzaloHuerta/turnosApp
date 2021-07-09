@@ -5,7 +5,7 @@ import ListaDeTurnos from '../components/ListaDeTurnos';
 import Header from '../components/Header';
 import ModalCancelarTurno from '../components/ModalCancelarTurno';
 
-const HomeScreen = ({ navigation })=>{
+const HomeScreen = ({ route, navigation })=>{
   const [itemSeleccionado, setItemSeleccionado] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
   const [listaTurnos, setListaTurnos] = useState([]);
@@ -28,8 +28,12 @@ const HomeScreen = ({ navigation })=>{
     props.setPantallaInicio(false);
   }
 
-  const { listaTurnos, setListaTurnos } = route.params;
+  console.log(route.params);
 
+  if(route.params!==undefined){
+    const { listaTurnosParam, setListaTurnosParam } = route.params;
+  }
+  
     return(
         <View style={styles.container}>
             {/* <Header title="Lista de turnos"/> */}
@@ -48,7 +52,7 @@ const HomeScreen = ({ navigation })=>{
               
               <Text style={styles.title}>Turnos de hoy:</Text>
               <ListaDeTurnos 
-                listaTurnos={listaTurnos}
+                listaTurnos={ listaTurnos }
                 handleModalCancelarTurno={handleModalCancelarTurno}
               />
             </View>
