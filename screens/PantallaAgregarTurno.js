@@ -1,17 +1,19 @@
 import React, {useState} from 'react';
-import { View, StyleSheet, Button, Text, TouchableOpacity} from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import { useDispatch } from 'react-redux';
 
-import Header from '../components/Header';
+import { agregarTurno } from '../store/actions/turnos.action';
+
 import FormAgregarTurno from '../components/FormAgregarTurno';
 
 const PantallaAgregarTurno = ({ route, navigation })=>{
+    const dispatch = useDispatch();
+
     const [cliente, setCliente] = useState('');
     const [horaTurno, setHoraTurno] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [sinDatos, setSinDatos] = useState(false);
     const [turnoAgregadoTxt, setTurnoAgregadoTxt] = useState(false);
-
-    const { listaTurnos, setListaTurnos } = route.params;
 
     const handleSetCliente = (txtCliente)=>{
         setCliente(txtCliente);
@@ -40,31 +42,22 @@ const PantallaAgregarTurno = ({ route, navigation })=>{
           setSinDatos(true);
         }
         else{
-          setListaTurnos([
-            ...listaTurnos,
-            {
-              id: Math.random().toString(),
-              hora: horaTurno,
-              cliente: cliente,
-              descripcion: descripcion
-            }
-          ])
-          setCliente('');
-          setHoraTurno('');
-          setDescripcion('');
-          setSinDatos(false);
-          setTurnoAgregadoTxt(true);
-          console.log('Lista Turnos', listaTurnos);
+            dispatch(agregarTurno(Math.random().toString(), horaTurno, cliente, descripcion ));
+
+            setCliente('');
+            setHoraTurno('');
+            setDescripcion('');
+            setSinDatos(false);
+            setTurnoAgregadoTxt(true);
         }
     }
 
-    const handleIrAInicio = ()=>{
-        props.setPantallaInicio(true);
+    const handleIrAListaDeTurnos = ()=>{
+        navigation.navigate('Home');
     }
 
     return(
         <View style={styles.container}>
-            {/* <Header title="Agregar nuevo turno" /> */}
             <FormAgregarTurno 
                 handleSetHoraTurno={handleSetHoraTurno}
                 handleSetCliente={handleSetCliente}
@@ -76,15 +69,7 @@ const PantallaAgregarTurno = ({ route, navigation })=>{
                 sinDatos={sinDatos}
             />
             {turnoAgregadoTxt ? <Text style={styles.mensaje}>¡Turno agregado!</Text> : null}
-            <TouchableOpacity 
-                style={styles.botonVerTurnos} 
-                onPress={()=>{
-                    navigation.navigate('Home',{
-                        listaTurnos: listaTurnos,
-                        setListaTurnos: setListaTurnos
-                      });
-                }} 
-            >
+            <TouchableOpacity style={styles.botonVerTurnos} onPress={handleIrAListaDeTurnos} >
               <Text style={styles.textoBoton}>Ver lista de turnos</Text>
             </TouchableOpacity>
         </View>
