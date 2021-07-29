@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import ListaDeTurnos from "../components/ListaDeTurnos";
@@ -11,7 +11,6 @@ const HomeScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const listaDeTurnos = useSelector((state) => state.turnos.listaDeTurnos);
 
-  /* console.log(listaDeTurnos); */
   const [itemSeleccionado, setItemSeleccionado] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -30,27 +29,14 @@ const HomeScreen = ({ route, navigation }) => {
     setItemSeleccionado({});
   };
 
-  const handleIrAAgregarTurnos = () => {
-    navigation.navigate("AgregarTurno", {
-      listaTurnos: listaDeTurnos,
-    });
-  };
-
   return (
     <View style={styles.container}>
-      {/* <Header title="Lista de turnos"/> */}
-      <TouchableOpacity
-        style={styles.botonIrATurnos}
-        onPress={handleIrAAgregarTurnos}
-      >
-        <Text style={styles.textoBotonIrATurnos}>Agregar Turnos</Text>
-      </TouchableOpacity>
       {listaDeTurnos.length > 0 ? (
         <View>
-          <Text style={styles.title}>Turnos de hoy:</Text>
           <ListaDeTurnos
             listaTurnos={listaDeTurnos}
             handleModalCancelarTurno={handleModalCancelarTurno}
+            navigation={navigation}
           />
         </View>
       ) : (

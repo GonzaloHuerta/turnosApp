@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import Colors from '../constants/colors';
 
 const FormAgregarTurno = (props)=>{
     return(
@@ -55,15 +56,10 @@ const styles = StyleSheet.create({
       },
       botonAgregarTurno:{
         alignItems: 'center',
-        backgroundColor: '#44AF69',
+        backgroundColor: Colors.primary,
         padding: 10,
         borderRadius: 10,
-      },
-      botonAgregarTurnoDisabled:{
-        alignItems: 'center',
-        backgroundColor: '#eaeaea',
-        padding: 10,
-      },  
+      }, 
       textoBoton:{
         color: "#ffffff",
         fontWeight: 'bold',

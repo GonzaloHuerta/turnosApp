@@ -52,10 +52,6 @@ const PantallaAgregarTurno = ({ route, navigation })=>{
         }
     }
 
-    const handleIrAListaDeTurnos = ()=>{
-        navigation.navigate('Home');
-    }
-
     return(
         <View style={styles.container}>
             <FormAgregarTurno 
@@ -69,9 +65,6 @@ const PantallaAgregarTurno = ({ route, navigation })=>{
                 sinDatos={sinDatos}
             />
             {turnoAgregadoTxt ? <Text style={styles.mensaje}>¡Turno agregado!</Text> : null}
-            <TouchableOpacity style={styles.botonVerTurnos} onPress={handleIrAListaDeTurnos} >
-              <Text style={styles.textoBoton}>Ver lista de turnos</Text>
-            </TouchableOpacity>
         </View>
     )
 }
