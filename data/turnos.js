@@ -1,5 +1,5 @@
 export const TURNOS =[
-    {
+    /* {
         id: '1',
         hora: '10',
         cliente: 'Gonzalo',
@@ -22,5 +22,5 @@ export const TURNOS =[
         hora: '17',
         cliente: 'Cecilia',
         descripcion: 'Tratamiento capilar'
-    },
+    }, */
 ]

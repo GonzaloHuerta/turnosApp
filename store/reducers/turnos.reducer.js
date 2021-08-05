@@ -1,8 +1,8 @@
 import { TURNOS } from "../../data/turnos";
-import { AGREGAR_TURNO, CANCELAR_TURNO } from "../actions/turnos.action";
+import { AGREGAR_TURNO, CANCELAR_TURNO, LEER_TURNOS } from "../actions/turnos.action";
 
 const INITIAL_STATE = {
-  listaDeTurnos: TURNOS,
+  listaDeTurnos: [],
   selected: null,
 };
 
@@ -13,10 +13,10 @@ const TurnosReducer = (state = INITIAL_STATE, action) => {
           listaDeTurnos:[
             ...state.listaDeTurnos,
             {
-              id: action.id,
-              hora: action.hora,
-              cliente: action.cliente,
-              descripcion: action.descripcion,
+              id: action.payload.id.toString(),
+              hora: action.payload.hora,
+              cliente: action.payload.cliente,
+              descripcion: action.payload.descripcion,
             },
           ]
       }
@@ -24,6 +24,11 @@ const TurnosReducer = (state = INITIAL_STATE, action) => {
       const listaDeTurnosFiltrada = state.listaDeTurnos.filter((item) => item.id !== action.id);
       return{
         listaDeTurnos: listaDeTurnosFiltrada,
+      }
+    case LEER_TURNOS:
+      return{
+        ...state,
+
       }
     default:
       return { ...state }  

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import ListaDeTurnos from "../components/ListaDeTurnos";
 import ModalCancelarTurno from "../components/ModalCancelarTurno";
 
-import { cancelarTurno } from '../store/actions/turnos.action';
+import { cancelarTurno, leerTurnos } from '../store/actions/turnos.action';
 
 const HomeScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
@@ -28,6 +28,10 @@ const HomeScreen = ({ route, navigation }) => {
     setModalVisible(false);
     setItemSeleccionado({});
   };
+
+  useEffect(()=>{
+    dispatch(leerTurnos());
+  }, [])
 
   return (
     <View style={styles.container}>
