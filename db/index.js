@@ -49,3 +49,17 @@ export const leerTurnos = ()=>{
     });
     return promise;
 }
+
+export const cancelarTurno = (id)=>{
+    const promise = new Promise((resolve, reject)=>{
+        db.transaction(tx=>{
+            tx.executeSql(
+                `DELETE FROM turnos WHERE id='${id}';`,
+                [],
+                (_,result)=>{ resolve(result) },
+                (_, err)=>{ reject(err) },
+            );
+        })
+    });
+    return promise;
+}

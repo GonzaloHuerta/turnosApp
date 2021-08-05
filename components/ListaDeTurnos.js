@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native
 import Colors from '../constants/colors';
 
 const ListaDeTurnos = (props, navigation)=>{
-
-  const handleDetallesDelTurno = (cliente, hora, descripcion)=>{
-    props.navigation.navigate('DetallesTurno', {cliente: cliente, hora: hora, descripcion: descripcion});
+  /* console.log(props.listaTurnos) */
+  const handleDetallesDelTurno = (nombreCliente, horaTurno, descripcion)=>{
+    props.navigation.navigate('DetallesTurno', {cliente: nombreCliente, hora: horaTurno, descripcion: descripcion});
   }
     return(
           <View style={styles.listContainer}>
@@ -14,14 +14,14 @@ const ListaDeTurnos = (props, navigation)=>{
               renderItem={data=>{
                   return(
                     <View style={styles.itemContainer}>
-                        <Text style={styles.horaTurno}>{data.item.hora} hs.</Text>
-                          <Text style={styles.nombreCliente}>{data.item.cliente}</Text>
+                        <Text style={styles.horaTurno}>{data.item.horaTurno} hs.</Text>
+                          <Text style={styles.nombreCliente}>{data.item.nombreCliente}</Text>
                           <Text style={styles.descripcion}>{data.item.descripcion}</Text>
                           <View style={styles.buttonsContainer}>
                             <TouchableOpacity style={styles.botonCancelarTurno} onPress={()=>props.handleModalCancelarTurno(data.item.id)}>
                               <Text style={styles.textoBoton}>Cancelar Turno</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.botonDetallesTurno} onPress={()=>handleDetallesDelTurno(data.item.cliente, data.item.hora, data.item.descripcion)}>
+                            <TouchableOpacity style={styles.botonDetallesTurno} onPress={()=>handleDetallesDelTurno(data.item.nombreCliente, data.item.horaTurno, data.item.descripcion)}>
                               <Text style={styles.textoBoton}>Detalles del turno</Text>
                             </TouchableOpacity>
                           </View>

@@ -18,7 +18,7 @@ const FormAgregarTurno = (props)=>{
                 placeholder='Nombre del cliente'
                 style={styles.input}
                 onChangeText={props.handleSetCliente}
-                value={props.cliente}
+                value={props.nombreCliente}
             />
             </View>
             <TextInput 

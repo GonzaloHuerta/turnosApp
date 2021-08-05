@@ -9,14 +9,14 @@ import FormAgregarTurno from '../components/FormAgregarTurno';
 const PantallaAgregarTurno = ({ route, navigation })=>{
     const dispatch = useDispatch();
 
-    const [cliente, setCliente] = useState('');
+    const [nombreCliente, setNombreCliente] = useState('');
     const [horaTurno, setHoraTurno] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [sinDatos, setSinDatos] = useState(false);
     const [turnoAgregadoTxt, setTurnoAgregadoTxt] = useState(false);
 
     const handleSetCliente = (txtCliente)=>{
-        setCliente(txtCliente);
+        setNombreCliente(txtCliente);
         setTurnoAgregadoTxt(false);
     }
     
@@ -38,13 +38,13 @@ const PantallaAgregarTurno = ({ route, navigation })=>{
     }
       
     const handleAgregarTurno = ()=>{
-        if(cliente == '' || horaTurno == '' || descripcion == ''){
+        if(nombreCliente == '' || horaTurno == '' || descripcion == ''){
           setSinDatos(true);
         }
         else{
-            dispatch(agregarTurno(Math.random().toString(), horaTurno, cliente, descripcion ));
+            dispatch(agregarTurno( horaTurno, nombreCliente, descripcion ));
 
-            setCliente('');
+            setNombreCliente('');
             setHoraTurno('');
             setDescripcion('');
             setSinDatos(false);
@@ -60,7 +60,7 @@ const PantallaAgregarTurno = ({ route, navigation })=>{
                 handleSetDescripcion={handleSetDescripcion}
                 handleAgregarTurno={handleAgregarTurno}
                 horaTurno={horaTurno}
-                cliente={cliente}
+                cliente={nombreCliente}
                 descripcion={descripcion}
                 sinDatos={sinDatos}
             />

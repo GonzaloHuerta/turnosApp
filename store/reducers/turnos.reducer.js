@@ -14,20 +14,21 @@ const TurnosReducer = (state = INITIAL_STATE, action) => {
             ...state.listaDeTurnos,
             {
               id: action.payload.id.toString(),
-              hora: action.payload.hora,
-              cliente: action.payload.cliente,
+              horaTurno: action.payload.horaTurno,
+              nombreCliente: action.payload.nombreCliente,
               descripcion: action.payload.descripcion,
             },
           ]
       }
     case CANCELAR_TURNO:
-      const listaDeTurnosFiltrada = state.listaDeTurnos.filter((item) => item.id !== action.id);
+      const listaDeTurnosFiltrada = state.listaDeTurnos.filter((item) => item.id !== action.payload.id);
       return{
         listaDeTurnos: listaDeTurnosFiltrada,
       }
     case LEER_TURNOS:
       return{
         ...state,
+        listaDeTurnos: action.payload.turnos
 
       }
     default:
