@@ -17,6 +17,8 @@ const TurnosReducer = (state = INITIAL_STATE, action) => {
               horaTurno: action.payload.horaTurno,
               nombreCliente: action.payload.nombreCliente,
               descripcion: action.payload.descripcion,
+              ubicacionLat: action.payload.ubicacionLat,
+              ubicacionLong: action.payload.ubicacionLong,
             },
           ]
       }

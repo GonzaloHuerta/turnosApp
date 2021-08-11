@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { agregarTurno } from '../store/actions/turnos.action';
 
 import FormAgregarTurno from '../components/FormAgregarTurno';
+import LocationPicker from '../components/LocationPicker';
 
 const PantallaAgregarTurno = ({ route, navigation })=>{
     const dispatch = useDispatch();
@@ -12,8 +13,14 @@ const PantallaAgregarTurno = ({ route, navigation })=>{
     const [nombreCliente, setNombreCliente] = useState('');
     const [horaTurno, setHoraTurno] = useState('');
     const [descripcion, setDescripcion] = useState('');
+    const [ubicacionLat, setUbicacionLat] = useState('');
+    const [ubicacionLong, setUbicacionLong] = useState('');
     const [sinDatos, setSinDatos] = useState(false);
     const [turnoAgregadoTxt, setTurnoAgregadoTxt] = useState(false);
+
+    useEffect(()=>{
+        setTurnoAgregadoTxt(false);
+    },[])
 
     const handleSetCliente = (txtCliente)=>{
         setNombreCliente(txtCliente);
@@ -36,13 +43,18 @@ const PantallaAgregarTurno = ({ route, navigation })=>{
         setDescripcion(txtDescripcion);
         setTurnoAgregadoTxt(false);
     }
+
+    const handleSetUbicacion = (lat, long)=>{
+        setUbicacionLat(lat);
+        setUbicacionLong(long);
+    }
       
     const handleAgregarTurno = ()=>{
         if(nombreCliente == '' || horaTurno == '' || descripcion == ''){
           setSinDatos(true);
         }
         else{
-            dispatch(agregarTurno( horaTurno, nombreCliente, descripcion ));
+            dispatch(agregarTurno( horaTurno, nombreCliente, descripcion, ubicacionLat, ubicacionLong ));
 
             setNombreCliente('');
             setHoraTurno('');
@@ -58,13 +70,15 @@ const PantallaAgregarTurno = ({ route, navigation })=>{
                 handleSetHoraTurno={handleSetHoraTurno}
                 handleSetCliente={handleSetCliente}
                 handleSetDescripcion={handleSetDescripcion}
+                handleSetUbicacion={handleSetUbicacion}
                 handleAgregarTurno={handleAgregarTurno}
                 horaTurno={horaTurno}
-                cliente={nombreCliente}
+                nombreCliente={nombreCliente}
                 descripcion={descripcion}
                 sinDatos={sinDatos}
             />
             {turnoAgregadoTxt ? <Text style={styles.mensaje}>¡Turno agregado!</Text> : null}
+            
         </View>
     )
 }

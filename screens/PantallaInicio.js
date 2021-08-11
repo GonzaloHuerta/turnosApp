@@ -10,7 +10,7 @@ import { cancelarTurno, leerTurnos } from '../store/actions/turnos.action';
 const HomeScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const listaDeTurnos = useSelector((state) => state.turnos.listaDeTurnos);
-  /* console.log(listaDeTurnos) */
+ /*  console.log(listaDeTurnos) */
 
   const [itemSeleccionado, setItemSeleccionado] = useState({});
   const [modalVisible, setModalVisible] = useState(false);

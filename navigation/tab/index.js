@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import Colors from '../../constants/colors';
+import Colors from '../../constants/Colors';
 
 import AgregarTurnosNavigator from '../agregarTurnos';
 import TurnosNavigator from '../listaDeturnos';

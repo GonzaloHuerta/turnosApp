@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import Colors from '../constants/colors';
+import Colors from '../constants/Colors';
+import LocationPicker from './LocationPicker';
 
 const FormAgregarTurno = (props)=>{
     return(
@@ -27,6 +28,9 @@ const FormAgregarTurno = (props)=>{
                 onChangeText={props.handleSetDescripcion}
                 value={props.descripcion}
             />
+
+            <LocationPicker handleSetUbicacion={props.handleSetUbicacion} />
+
             <TouchableOpacity style={styles.botonAgregarTurno} onPress={props.handleAgregarTurno} >
               <Text style={styles.textoBoton}>Agregar Turno</Text>
             </TouchableOpacity>

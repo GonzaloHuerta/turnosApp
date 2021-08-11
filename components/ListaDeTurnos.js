@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
-import Colors from '../constants/colors';
+import Colors from '../constants/Colors';
 
 const ListaDeTurnos = (props, navigation)=>{
   /* console.log(props.listaTurnos) */
-  const handleDetallesDelTurno = (nombreCliente, horaTurno, descripcion)=>{
-    props.navigation.navigate('DetallesTurno', {cliente: nombreCliente, hora: horaTurno, descripcion: descripcion});
+  const handleDetallesDelTurno = (nombreCliente, horaTurno, descripcion, ubicacionLat, ubicacionLong)=>{
+    props.navigation.navigate('DetallesTurno', {cliente: nombreCliente, hora: horaTurno, descripcion: descripcion, ubicacionLat: ubicacionLat, ubicacionLong: ubicacionLong});
   }
     return(
           <View style={styles.listContainer}>
@@ -21,7 +21,7 @@ const ListaDeTurnos = (props, navigation)=>{
                             <TouchableOpacity style={styles.botonCancelarTurno} onPress={()=>props.handleModalCancelarTurno(data.item.id)}>
                               <Text style={styles.textoBoton}>Cancelar Turno</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.botonDetallesTurno} onPress={()=>handleDetallesDelTurno(data.item.nombreCliente, data.item.horaTurno, data.item.descripcion)}>
+                            <TouchableOpacity style={styles.botonDetallesTurno} onPress={()=>handleDetallesDelTurno(data.item.nombreCliente, data.item.horaTurno, data.item.descripcion, data.item.ubicacionLat, data.item.ubicacionLong)}>
                               <Text style={styles.textoBoton}>Detalles del turno</Text>
                             </TouchableOpacity>
                           </View>

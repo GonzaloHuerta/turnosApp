@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import PantallaInicio from '../../screens/PantallaInicio';
 import PantallaDetallesDeTurno from '../../screens/PantallaDetallesDeTurno';
-import Colors from '../../constants/colors';
+import Colors from '../../constants/Colors';
 const Stack = createStackNavigator();
 
 const TurnosNavigator = ()=>{

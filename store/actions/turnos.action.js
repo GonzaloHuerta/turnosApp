@@ -6,13 +6,13 @@ export const AGREGAR_TURNO = 'AGREGAR_TURNO';
 export const CANCELAR_TURNO = 'CANCELAR_TURNO';
 export const LEER_TURNOS = 'LEER_TURNOS';
 
-export const agregarTurno = (horaTurno, nombreCliente, descripcion)=>{
+export const agregarTurno = (horaTurno, nombreCliente, descripcion, ubicacionLat, ubicacionLong)=>{
     return async dispatch=>{
         try{
-            const result = await agregarTurnoDB(horaTurno, nombreCliente, descripcion);
+            const result = await agregarTurnoDB(horaTurno, nombreCliente, descripcion, ubicacionLat, ubicacionLong);
             dispatch({ 
                 type: AGREGAR_TURNO, 
-                payload: { id: result.insertId.toString(), horaTurno, nombreCliente, descripcion} 
+                payload: { id: result.insertId.toString(), horaTurno, nombreCliente, descripcion, ubicacionLat, ubicacionLong} 
             })
         }catch(err){
             throw err;
