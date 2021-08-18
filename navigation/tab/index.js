@@ -6,6 +6,7 @@ import Colors from '../../constants/Colors';
 
 import AgregarTurnosNavigator from '../agregarTurnos';
 import TurnosNavigator from '../listaDeturnos';
+import CalendarioNavigator from '../calendario';
 
 const TabStack = createBottomTabNavigator();
 
@@ -37,6 +38,24 @@ const TabNavigator = ()=>{
                     )
                 }}
             />
+
+            <TabStack.Screen 
+                name="Agenda de turnos" 
+                component={CalendarioNavigator}
+                options={{
+                    tabBarIcon: ({ focused })=>(
+                        <View style={styles.item}>
+                            {focused ?
+                               <Ionicons name="calendar" size={24} color="#ffffff" /> 
+                               : 
+                               <Ionicons name="calendar-outline" size={24} color="#ffffff" />
+                            }
+                            <Text style={styles.iconText}>Agenda</Text>
+                        </View>
+                    )
+                }} 
+            />
+
             <TabStack.Screen 
                 name="Agregar Turnos" 
                 component={AgregarTurnosNavigator}
