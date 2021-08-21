@@ -8,11 +8,9 @@ export const init = ()=>{
             tx.executeSql(
                 `CREATE TABLE IF NOT EXISTS turnos (
                     id INTEGER PRIMARY KEY NOT NULL,
-                    horaTurno TEXT NOT NULL,
+                    fechaYHora DATETIME NOT NULL,
                     nombreCliente TEXT NOT NULL,
-                    descripcion TEXT NOT NULL,
-                    ubicacionLat TEXT NOT NULL,
-                    ubicacionLong TEXT NOT NULL
+                    descripcion TEXT NOT NULL
                 )`,
                 [],
                 () =>{ resolve() },
@@ -24,12 +22,12 @@ export const init = ()=>{
     return promise;
 }
 
-export const agregarTurno = (horaTurno, nombreCliente, descripcion, ubicacionLat, ubicacionLong) =>{
+export const agregarTurno = (fechaYHora, nombreCliente, descripcion) =>{
     const promise = new Promise((resolve, reject)=>{
         db.transaction(tx=>{
             tx.executeSql(
-                `INSERT INTO turnos (horaTurno, nombreCliente, descripcion, ubicacionLat, ubicacionLong) VALUES (?, ?, ?, ?, ?)`,
-                [horaTurno, nombreCliente, descripcion, ubicacionLat, ubicacionLong],
+                `INSERT INTO turnos (fechaYHora, nombreCliente, descripcion) VALUES (?, ?, ?)`,
+                [fechaYHora, nombreCliente, descripcion],
                 (_, result)=>{ resolve(result) },
                 (_, err)=>{ reject(err) },
             );

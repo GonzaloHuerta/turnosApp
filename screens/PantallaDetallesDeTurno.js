@@ -1,15 +1,9 @@
 import React from 'react';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
-import MapPreview from '../components/MapPreview';
 import Colors from '../constants/Colors';
 
 const PantallaDetallesDeTurno = ({navigation, route})=>{
-    const {cliente, hora, descripcion, ubicacionLat, ubicacionLong} = route.params;
-    
-    const ubicacionSeleccionada = {
-        lat: ubicacionLat,
-        lng: ubicacionLong,
-    }
+    const {cliente, hora, descripcion} = route.params;
     return(
         <View style={styles.screen}>
             <View style={styles.detail}>
@@ -17,7 +11,6 @@ const PantallaDetallesDeTurno = ({navigation, route})=>{
                 <Text style={styles.textoDescripcion}>{cliente}</Text>
                 <Text style={styles.textoDescripcion}>Descripción del trabajo:</Text>
                 <Text style={styles.textoDescripcion}>{descripcion}</Text>
-                <MapPreview style={styles.mapPreview} location={ubicacionSeleccionada} />
             </View>    
         </View>
     )

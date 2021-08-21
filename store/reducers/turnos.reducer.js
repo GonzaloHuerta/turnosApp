@@ -1,4 +1,3 @@
-import { TURNOS } from "../../data/turnos";
 import { AGREGAR_TURNO, CANCELAR_TURNO, LEER_TURNOS } from "../actions/turnos.action";
 
 const INITIAL_STATE = {
@@ -14,11 +13,9 @@ const TurnosReducer = (state = INITIAL_STATE, action) => {
             ...state.listaDeTurnos,
             {
               id: action.payload.id.toString(),
-              horaTurno: action.payload.horaTurno,
+              fechaYHora: action.payload.fechaYHora,
               nombreCliente: action.payload.nombreCliente,
               descripcion: action.payload.descripcion,
-              ubicacionLat: action.payload.ubicacionLat,
-              ubicacionLong: action.payload.ubicacionLong,
             },
           ]
       }

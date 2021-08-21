@@ -6,30 +6,20 @@ export const AGREGAR_TURNO = 'AGREGAR_TURNO';
 export const CANCELAR_TURNO = 'CANCELAR_TURNO';
 export const LEER_TURNOS = 'LEER_TURNOS';
 
-export const agregarTurno = (horaTurno, nombreCliente, descripcion, ubicacionLat, ubicacionLong)=>{
+export const agregarTurno = (fechaYHora, nombreCliente, descripcion)=>{
     return async dispatch=>{
         try{
-            const result = await agregarTurnoDB(horaTurno, nombreCliente, descripcion, ubicacionLat, ubicacionLong);
+            const result = await agregarTurnoDB(fechaYHora, nombreCliente, descripcion);
+            /* console.log(result) */
             dispatch({ 
                 type: AGREGAR_TURNO, 
-                payload: { id: result.insertId.toString(), horaTurno, nombreCliente, descripcion, ubicacionLat, ubicacionLong} 
+                payload: { id: result.insertId.toString(), fechaYHora, nombreCliente, descripcion} 
             })
+            console.log(dispatch)
         }catch(err){
             throw err;
         }
-    }
-    
-   /*  return(
-        {
-            type: AGREGAR_TURNO,
-            id: result.insertId,
-            hora: hora,
-            cliente: cliente,
-            descripcion: descripcion,
-        }
-        
-    ) */
-    
+    } 
 };
 
 export const cancelarTurno = (id)=>{

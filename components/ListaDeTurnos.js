@@ -4,8 +4,8 @@ import Colors from '../constants/Colors';
 
 const ListaDeTurnos = (props, navigation)=>{
   /* console.log(props.listaTurnos) */
-  const handleDetallesDelTurno = (nombreCliente, horaTurno, descripcion, ubicacionLat, ubicacionLong)=>{
-    props.navigation.navigate('DetallesTurno', {cliente: nombreCliente, hora: horaTurno, descripcion: descripcion, ubicacionLat: ubicacionLat, ubicacionLong: ubicacionLong});
+  const handleDetallesDelTurno = (nombreCliente, horaTurno, descripcion)=>{
+    props.navigation.navigate('DetallesTurno', {cliente: nombreCliente, hora: horaTurno, descripcion: descripcion});
   }
     return(
           <View style={styles.listContainer}>
@@ -14,7 +14,7 @@ const ListaDeTurnos = (props, navigation)=>{
               renderItem={data=>{
                   return(
                     <View style={styles.itemContainer}>
-                        <Text style={styles.horaTurno}>{data.item.horaTurno} hs.</Text>
+                        <Text style={styles.horaTurno}>{data.item.fechaYHora} hs.</Text>
                           <Text style={styles.nombreCliente}>{data.item.nombreCliente}</Text>
                           <Text style={styles.descripcion}>{data.item.descripcion}</Text>
                           <View style={styles.buttonsContainer}>
