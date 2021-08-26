@@ -10,7 +10,7 @@ import { cancelarTurno, leerTurnos } from '../store/actions/turnos.action';
 const HomeScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const listaDeTurnos = useSelector((state) => state.turnos.listaDeTurnos);
-  console.log(listaDeTurnos);
+  /* console.log("este", listaDeTurnos); */
 
   const [itemSeleccionado, setItemSeleccionado] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
@@ -46,7 +46,7 @@ const HomeScreen = ({ route, navigation }) => {
           />
         </View>
       ) : (
-        <Text style={styles.textoSinTurnos}>Sin turnos para hoy</Text>
+        <Text style={styles.textoSinTurnos}>Sin turnos</Text>
       )}
 
       <ModalCancelarTurno
@@ -66,24 +66,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
-  title: {
-    fontSize: 24,
-    textAlign: "center",
-  },
   textoSinTurnos: {
     textAlign: "center",
     paddingVertical: 20,
-  },
-  botonIrATurnos: {
-    alignItems: "center",
-    backgroundColor: "#2B9EB3",
-    padding: 10,
-    marginBottom: 20,
-    borderRadius: 10,
-  },
-  textoBotonIrATurnos: {
-    color: "#ffffff",
-    fontWeight: "bold",
   },
 });
 

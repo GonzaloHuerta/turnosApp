@@ -6,7 +6,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 import { agregarTurno } from '../store/actions/turnos.action';
 
-const FormAgregarTurno = (props)=>{
+const FormAgregarTurno = ()=>{
   const dispatch = useDispatch();
 
   const [nombreCliente, setNombreCliente] = useState('');
@@ -21,6 +21,7 @@ const FormAgregarTurno = (props)=>{
 
   useEffect(()=>{
     setTurnoAgregadoTxt(false);
+    console.log("use effect!")
   },[])
 
   const handleSetCliente = (txtCliente)=>{
@@ -28,40 +29,36 @@ const FormAgregarTurno = (props)=>{
     setTurnoAgregadoTxt(false);
   }
 
-/* const handleSetHoraTurno = (txtHoraTurno) =>{
-    const valorNumerico = Number.parseInt(txtHoraTurno);
-    if (valorNumerico > 23){
-        setHoraTurno('00')
+  const handleSetDescripcion = (txtDescripcion) =>{
+      setDescripcion(txtDescripcion);
+      setTurnoAgregadoTxt(false);
+  }
+  
+  const handleAgregarTurno = ()=>{
+
+    if(nombreCliente == '' || !fechaYHora || descripcion == ''){
+      setSinDatos(true);
     }
     else{
-        setHoraTurno(txtHoraTurno)
+        dispatch(agregarTurno( fechaYHora, nombreCliente, descripcion ));
+        
+        setNombreCliente('');
+        /* setFechaYHora(''); */
+        setDescripcion('');
+        setSinDatos(false);
+        setTurnoAgregadoTxt(true);
+        setFechaYHora();
+        setFecha();
+        setHora();
     }
-    setTurnoAgregadoTxt(false);
-} */
-
-const handleSetDescripcion = (txtDescripcion) =>{
-    setDescripcion(txtDescripcion);
-    setTurnoAgregadoTxt(false);
-}
-  
-const handleAgregarTurno = ()=>{
-
-  if(nombreCliente == '' || fechaYHora == '' || descripcion == ''){
-    setSinDatos(true);
   }
-  else{
-      dispatch(agregarTurno( fechaYHora, nombreCliente, descripcion ));
-      
-      setNombreCliente('');
-      /* setFechaYHora(''); */
-      setDescripcion('');
-      setSinDatos(false);
-      setTurnoAgregadoTxt(true);
-  }
-}
 
   const showDatePicker = () => {
+    setFechaYHora();
+    setFecha();
+    setHora();
     setDateTimePickerVisibility(true);
+    setTurnoAgregadoTxt(false);
   };
 
   const hideDateTimePicker = () => {
@@ -77,42 +74,50 @@ const handleAgregarTurno = ()=>{
 
   return(
     <View style={styles.formAgregarTurno}>
-      
-      <View style={styles.formGroup}>
-        <View style={styles.center}>
-          <Button title="Fecha y hora del turno" onPress={showDatePicker} />
-          {fecha ? <Text>{fechaYHora.getDate()}/{fechaYHora.getMonth()+1}</Text> : null} 
-          {hora ? <Text>{hora}</Text>:null}
-        </View>   
-        <DateTimePickerModal
-          isVisible={isDateTimePickerVisible}
-          mode="datetime"
-          onConfirm={handleConfirmDateTime}
-          onCancel={hideDateTimePicker}
-          locale="es_AR"
-        />
-        <TextInput 
-            placeholder='Nombre del cliente'
-            style={styles.input}
-            onChangeText={handleSetCliente}
-            value={nombreCliente}
-        />
+      <TouchableOpacity style={styles.botonFechaYHora} onPress={showDatePicker} >
+        <Text style={styles.textoBoton}>Fecha y hora del turno</Text>
+      </TouchableOpacity>
+      <View style={styles.center}>
+{/*         {fecha ? <Text>{fechaYHora.getDate()}/{fechaYHora.getMonth()+1}</Text> : null} 
+        {hora ? <Text>{hora}</Text>:null} */}
+        {fecha && hora ? <Text style={styles.detallesFechaYHora}>{fechaYHora.getDate()}/{fechaYHora.getMonth()+1} - {hora}</Text> : null}
       </View>
-      <TextInput 
+      {/* <Button title="Fecha y hora del turno" onPress={showDatePicker} /> */}
+      
+          
+      <DateTimePickerModal
+        isVisible={isDateTimePickerVisible}
+        mode="datetime"
+        onConfirm={handleConfirmDateTime}
+        onCancel={hideDateTimePicker}
+        locale="es_AR"
+      />
+      <View style={styles.formGroup}>
+        <TextInput 
+          placeholder='Nombre del cliente'
+          placeholderTextColor="#c4c4c4" 
+          style={styles.input}
+          onChangeText={handleSetCliente}
+          value={nombreCliente}
+          />
+        <TextInput 
           placeholder='Descripción del Trabajo'
-          style={[styles.inputDescripcion, styles.input]}
+          placeholderTextColor="#c4c4c4" 
+          style={styles.input}
           onChangeText={handleSetDescripcion}
           value={descripcion}
-      />
+        />
+      </View >
 
-      {fechaYHora ? <Text>{fechaYHora.toLocaleString()}</Text> : null}
+
+      {/* {fechaYHora ? <Text>{fechaYHora.toLocaleString()}</Text> : null} */}
 
       {turnoAgregadoTxt ? <Text style={styles.mensaje}>¡Turno agregado!</Text> : null}
 
       <TouchableOpacity style={styles.botonAgregarTurno} onPress={handleAgregarTurno} >
         <Text style={styles.textoBoton}>Agregar Turno</Text>
       </TouchableOpacity>
-      {props.sinDatos ? <Text style={styles.textoError}>Por favor, complete los datos del turno</Text> : null}
+      {sinDatos ? <Text style={styles.textoError}>Por favor, complete los datos del turno</Text> : null}
     </View>
   )
 }
@@ -127,10 +132,12 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: '#999999',
         borderStyle: 'solid',
+        color: '#000000',
       },
       formGroup:{
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginTop: 20,
       },
       inputDescripcion:{
         marginBottom: 20,
@@ -141,7 +148,14 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.primary,
         padding: 10,
         borderRadius: 10,
-      }, 
+        marginTop: 20,
+      },
+      botonFechaYHora:{
+        alignItems: 'center',
+        backgroundColor: Colors.green,
+        padding: 10,
+        borderRadius: 10,
+      },
       textoBoton:{
         color: "#ffffff",
         fontWeight: 'bold',
@@ -153,12 +167,17 @@ const styles = StyleSheet.create({
       },
       mensaje:{
         textAlign: 'center',
-        paddingBottom: 20,
+        paddingVertical: 15,
         color: '#44AF69',
         fontWeight: 'bold',
         fontSize: 20
     },
     center:{
       textAlign: 'center',
+      alignItems: 'center',
+    },
+    detallesFechaYHora:{
+      marginTop: 15,
+      fontSize: 16,
     }
 })

@@ -7,15 +7,15 @@ export const CANCELAR_TURNO = 'CANCELAR_TURNO';
 export const LEER_TURNOS = 'LEER_TURNOS';
 
 export const agregarTurno = (fechaYHora, nombreCliente, descripcion)=>{
+    
     return async dispatch=>{
+        
         try{
             const result = await agregarTurnoDB(fechaYHora, nombreCliente, descripcion);
-            /* console.log(result) */
             dispatch({ 
                 type: AGREGAR_TURNO, 
                 payload: { id: result.insertId.toString(), fechaYHora, nombreCliente, descripcion} 
             })
-            console.log(dispatch)
         }catch(err){
             throw err;
         }
@@ -40,12 +40,13 @@ export const leerTurnos = ()=>{
     return async dispatch=>{
         try{
             const result = await leerTurnosDB();
-            /* console.log(result) */
+            
             dispatch({
                 type: LEER_TURNOS, 
                 payload: { turnos: result.rows._array }
                 
             })
+            
         }catch(error){
             throw error;
         }

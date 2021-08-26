@@ -1,15 +1,16 @@
 {
   "expo": {
-    "name": "listaTurnos-Huerta",
-    "slug": "listaTurnos-Huerta",
+    "name": "TurnosApp",
+    "slug": "app-turnos",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "platforms": ["ios", "android"],
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#416788"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -18,13 +19,20 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.app.turnos",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
+      "package":"com.app.turnos",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "backgroundColor": "#416788"
+      },
+      "permissions":[
+        "CALENDAR",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"

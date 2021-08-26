@@ -23,12 +23,13 @@ export const init = ()=>{
 }
 
 export const agregarTurno = (fechaYHora, nombreCliente, descripcion) =>{
+    const fechaYHoraFormat = fechaYHora.toISOString();
     const promise = new Promise((resolve, reject)=>{
         db.transaction(tx=>{
             tx.executeSql(
                 `INSERT INTO turnos (fechaYHora, nombreCliente, descripcion) VALUES (?, ?, ?)`,
-                [fechaYHora, nombreCliente, descripcion],
-                (_, result)=>{ resolve(result) },
+                [fechaYHoraFormat, nombreCliente, descripcion],
+                (_, result)=>{ resolve(result)},
                 (_, err)=>{ reject(err) },
             );
         });
